@@ -18,7 +18,7 @@ const ProductCard = ({ product, home }) => {
             {/* Best Seller Badge */}
             {rating > 3.9 && !home && (
                 <span className='absolute top-0 right-0 bg-red-500 text-white text-xs md:text-sm  px-1 rounded-sm'>
-                    Best Seller
+                    Best Seller hh
                 </span>
             )}
 

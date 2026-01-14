@@ -2,7 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import HorSlider from "./HorSlider";
 
-const ShopBy = ({ filter, title }) => {
+
+const ShopBy = ({ filter, title, data }) => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -11,8 +12,9 @@ const ShopBy = ({ filter, title }) => {
     let isMounted = true;
     const fetchData = async () => {
       try {
+        console.log(import.meta.env.VITE_BASE_URL)
         const res = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}/api/filter/${filter}`
+          `${import.meta.env.VITE_BASE_URL}filter/${filter}`
         );
         if (isMounted) {
           setProducts(res.data);
@@ -31,6 +33,10 @@ const ShopBy = ({ filter, title }) => {
       isMounted = false;
     };
   }, []);
+  useEffect(() => {
+    setProducts(data);
+  }, [data]);
+            console.log(products)
 
   return (
     <>
@@ -41,7 +47,8 @@ const ShopBy = ({ filter, title }) => {
 
         <div className="flex flex-nowrap space-x-4">
           {/* Ensure products is always an array */}
-          {(Array.isArray(products) ? products : []).map((elem) => (
+          {
+          (Array.isArray(products) ? products : [])?.map((elem) => (
             <HorSlider
               product={elem}
               key={elem._id || elem.id} // fallback if _id is missing
