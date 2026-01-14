@@ -1,10 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useWishList } from "../context/WishListContext";
-
+const data = [
+    { src: "/GenInfo/adidas.jpg", name: "Adidas", to: "/search/adidas" },
+    { src: "/GenInfo/nike.png", name: "Nike", to: "/search/nike" },
+    { src: "/GenInfo/skechers.jpg", name: "Skechers", to: "/search/skechers" },
+    { src: "/GenInfo/puma.jpg", name: "Puma", to: "/search/puma" },
+  ];
 const HorSlider = ({ product, home }) => {
     // Destructure the product properties
-    const { img, title, sellPrice, mrp, discount, brand, category, rating } =
+    const { img,src,name,to, title, sellPrice, mrp, discount, brand, category, rating } =
         product;
 
     // Destructure wishlist context methods and state
@@ -33,20 +38,21 @@ const HorSlider = ({ product, home }) => {
                             Best Seller
                         </span>
                     )}
+                    
                 </div>
 
                 {/* Product image */}
                 <div className="xs:h-2/3 sm:h-1/2 md:h-2/3 md:w-5/6 xs:text-sm md:text-base flex items-center ">
                     <Link to={`/product-details/${product._id}`}>
-                        <img src={img} alt={title} />
+                        <img src={src} alt={title} />
                     </Link>
                 </div>
 
                 {/* Product title */}
-                <p>{title}</p>
+                <p>{name}</p>
 
                 {/* Product category and brand */}
-                <div className="flex items-center justify-between text-gray-400 xs:text-sm">
+                {/* <div className="flex items-center justify-between text-gray-400 xs:text-sm">
                     <p>
                         {category === "child"
                             ? `Kids`
@@ -58,7 +64,7 @@ const HorSlider = ({ product, home }) => {
                         Shoes
                     </p>
                     <p>{brand}</p>
-                </div>
+                </div> */}
 
                 {/* Product price, MRP, and discount */}
                 <div className=" h-1/6 flex justify-start items-center xs:gap-1 md:gap-2 pb-2 xs:text-xs ">
